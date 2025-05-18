@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ airplane.id|default:"Новий літак" }}</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #34495e;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #27ae60;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #2980b9;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>{{ airplane.model|default:"Новий літак" }}</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <label for="model">Модель:</label>
+    <input id="model" name="model" value="{{ airplane.model|default:"" }}">
+
+    <label for="capacity">Місткість:</label>
+    <input id="capacity" name="capacity" value="{{ airplane.capacity|default:"" }}">
+
+    <label for="year_produced">Рік випуску:</label>
+    <input id="year_produced" name="year_produced" value="{{ airplane.year_produced|default:"" }}">
+
+    <label for="airline">Авіакомпанія:</label>
+    <select id="airline" name="airline">
+      {% for airline in airlines %}
+        <option value="{{ airline.id }}"
+          {% if airplane.airline.id == airline.id %}selected{% endif %}>
+          {{ airline.name }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <label for="manufacturer">Виробник:</label>
+    <select id="manufacturer" name="manufacturer">
+      {% for manufacturer in manufacturers %}
+        <option value="{{ manufacturer.id }}"
+          {% if airplane.manufacturer.id == manufacturer.id %}selected{% endif %}>
+          {{ manufacturer.name }} ({{ manufacturer.country }})
+        </option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Зберегти</button>
+  </form>
+
+  <a href="{% url 'airplane_list' %}" class="back-link">← Назад до списку</a>
+</div>
+
+</body>
+</html>

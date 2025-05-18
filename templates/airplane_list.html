@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Список літаків</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .top-bar {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .add-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #2ecc71;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .add-btn:hover {
+      background-color: #27ae60;
+    }
+
+    .plane-list {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .plane-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .plane-info {
+      font-size: 18px;
+      color: #34495e;
+    }
+
+    .actions a {
+      margin-left: 10px;
+      padding: 6px 12px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .view-btn {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .view-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .edit-btn {
+      background-color: #f39c12;
+      color: white;
+    }
+
+    .edit-btn:hover {
+      background-color: #e67e22;
+    }
+
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .plane-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Список літаків</h1>
+
+<div class="top-bar">
+  <a class="add-btn" href="{% url 'airplane_create' %}">+ Додати літак</a>
+</div>
+
+<div class="plane-list">
+  {% for airplane in airplanes %}
+    <div class="plane-item">
+      <div class="plane-info">
+        {{ airplane.model }} — {{ airplane.airline.name }}
+      </div>
+      <div class="actions">
+        <a class="view-btn" href="{% url 'airplane_view' airplane.id %}">Переглянути</a>
+        <a class="edit-btn" href="{% url 'airplane_detail' airplane.id %}">Редагувати</a>
+        <a class="delete-btn" href="{% url 'airplane_delete' airplane.id %}">Видалити</a>
+      </div>
+    </div>
+  {% empty %}
+    <p style="text-align:center;">Немає жодного літака.</p>
+  {% endfor %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Інформація про літак</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .airplane-photo {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    li {
+      padding: 10px 0;
+      font-size: 18px;
+      border-bottom: 1px solid #eee;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    strong {
+      color: #34495e;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .back-btn:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Інформація про літак</h1>
+
+  <img class="airplane-photo" src="https://t1.ua/photos/articles/2021/01/54190_1_1097.jpg" alt="Літак">
+
+  <ul>
+    <li><strong>Модель:</strong> {{ airplane.model }}</li>
+    <li><strong>Місткість:</strong> {{ airplane.capacity }}</li>
+    <li><strong>Рік випуску:</strong> {{ airplane.year_produced }}</li>
+    <li><strong>Авіакомпанія:</strong> {{ airplane.airline.name }} ({{ airplane.airline.country }})</li>
+    <li><strong>Виробник:</strong> {{ airplane.manufacturer.name }} ({{ airplane.manufacturer.country }})</li>
+  </ul>
+
+  <a class="back-btn" href="{% url 'airplane_list' %}">← Назад до списку</a>
+</div>
+
+</body>
+</html>
