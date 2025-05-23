@@ -11,7 +11,7 @@ def airplane_list(request):
         airplanes = airplane_service.get_all_airplanes()
         return render(request, 'airplane_list.html', {'airplanes': airplanes})
     except:
-        return HttpResponseServerError("Помилка в опрацюванні запиту")
+        return render(request, 'error.html', {'message': 'Помилка в опрацюванні запиту. Спробуйте пізніше.'})
 
 def airplane_detail(request, airplane_id=None):
     try:
@@ -44,18 +44,19 @@ def airplane_detail(request, airplane_id=None):
             'manufacturers': manufacturers
         })
     except :
-        return HttpResponseServerError("Помилка в опрацюванні запиту")
+        return render(request, 'error.html', {'message': 'Помилка в опрацюванні запиту. Спробуйте пізніше.'})
 
 def airplane_delete(request, airplane_id):
     try:
         airplane_service.delete_airplane(airplane_id)
         return redirect('airplane_list')
     except:
-        return HttpResponseServerError("Помилка в опрацюванні запиту")
+        return render(request, 'error.html', {'message': 'Помилка в опрацюванні запиту. Спробуйте пізніше.'})
 
 def airplane_view(request, airplane_id):
     try:
         airplane = airplane_service.get_airplane(airplane_id)
         return render(request, 'airplane_view.html', {'airplane': airplane})
     except ValueError:
-        return HttpResponseServerError("Помилка в опрацюванні запиту")
+        return render(request, 'error.html', {'message': 'Помилка в опрацюванні запиту. Спробуйте пізніше.'})
+

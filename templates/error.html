@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Помилка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 40px;
+            text-align: center;
+        }
+        .error-box {
+            background-color: #f5c6cb;
+            border: 1px solid #f1b0b7;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #721c24;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-box">
+        <h1>😥 Виникла помилка</h1>
+        <p>{{ message }}</p>
+        <a href="{% url 'airplane_list' %}">← Повернутися до списку літаків</a>
+    </div>
+</body>
+</html>
